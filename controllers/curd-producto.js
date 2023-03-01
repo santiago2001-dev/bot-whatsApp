@@ -4,6 +4,7 @@ const {client} = require('../middelwares/conexion-wha');
 class producto{
     constructor(){
         this.prod = ''
+        this.resultado = ''
     }
 //  getAllProduct = ()=>{
 //     const query = 'select * from productos';
@@ -54,11 +55,14 @@ getAllProduct = () => {
             //       stock: results[i].stock
             //     };
             //     products.push(product);
-                this.prod = ` total de productos : ${results.length}\n nombre : ${results[i].name}\n precio : ${results[i].price}\n cantidad: ${results[i].stock}`
-      //  this.prod = ` total de productos : ${results.length}\n ${results[i]}}`
+               
+            this.prod = ` total de productos : ${results.length}\n 🔍 nombre : ${results[i].name}\n 💸 precio : ${results[i].price}\n 🛒 cantidad: ${results[i].stock}\n\n`
+            this.resultado =this.resultado +  this.prod
+
+            //  this.prod = ` total de productos : ${results.length}\n ${results[i]}}`
 
           }
-          resolve(this.prod);
+          resolve(this.resultado);
         }
       });
     });
