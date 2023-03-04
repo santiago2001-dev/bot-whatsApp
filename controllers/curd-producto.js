@@ -8,7 +8,7 @@ class producto{
     }
 
 
-getAllProduct = () => {
+getAllProduct  () {
     const query = 'select * from productos';
     return new Promise((resolve, reject) => {
       db.query(query, (err, results, fields) => {
@@ -48,7 +48,7 @@ getAllProduct = () => {
         if (err) {
           reject(err);
         } else {
-          let rta = 'prooducto elimnado de forma correcta'
+          let rta = 'producto elimnado de forma correcta'
           resolve(rta);
         }
       });
@@ -62,7 +62,7 @@ getAllProduct = () => {
         if (err) {
           reject(err);
         } else {
-          let rta = 'prooducto agregado de forma correcta'
+          let rta = 'producto agregado de forma correcta'
           resolve(rta);
         }
       });

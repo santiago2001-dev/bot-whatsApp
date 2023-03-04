@@ -11,24 +11,24 @@ class Menu {
 
 
     }
-      opciones = ()=>{
+      async opciones (){
 
 
         this.menuPrincipal();
 
-        client.on('message',message=>{
+        client.on('message',async message=>{
                   if(message.body == '1'){
                     const producto = new Producto();
 
-                    producto.getAllProduct().then((products) => {
-                      client.sendMessage(message.from,products);
+                    let result = await producto.getAllProduct()
+                     await client.sendMessage(message.from,result);
               
-                      });
+                    
                       this.menuPrincipal();
 
                    }
                      if(message.body =='2'){
-                      client.sendMessage(message.from,'porfavor ingresa el nombre , precio y cantidad del producto seperado por coma');
+                      await  client.sendMessage(message.from,'porfavor ingresa el nombre , precio y cantidad del producto seperado por coma');
                       this.crate()
                     
                      
@@ -38,7 +38,7 @@ class Menu {
 
                     }
                   if(message.body =='4'){
-                    client.sendMessage(message.from,'porfavor ingresa el nombre del producto a eliminar')
+                    await client.sendMessage(message.from,'porfavor ingresa el nombre del producto a eliminar')
 
                     this.delete()
                   }
@@ -47,7 +47,7 @@ class Menu {
 }
 
         menuPrincipal(){
-        client.on('message',message=>{
+          client.on('message', message=>{
           if(message.body =='hola'  && !message.body.includes  ('1') && !message.body.includes  ('2')&& !message.body.includes  ('3')&& !message.body.includes('4')){
 
                 client.sendMessage(message.from,
@@ -64,44 +64,53 @@ class Menu {
            
            
 
-    crate(){
+      crate(){
       const producto = new Producto();
 
-      client.on('message',message => {
+      client.on('message',async message => {
       let array = message.body.split(",");
         this.nameProduct = array[0];
         this.priceProduct = array[1];
         this.stockProduct = array[2];
-        producto.addProduct(this.nameProduct,this.priceProduct,this.stockProduct).then(( rta)=>{
-            client.sendMessage(message.from,rta)
-        }).catch(function(err){
-          console.log(err.message)
-       }).finally(() => {
-          return
-      });
 
+        try{
+           const product = message.body.trim();
+           if (product == '1' ||product == '2' ||product == '3' ||product == '4' ) {
+            this.menuPrincipal();
+           }else{
+            let resultado = await producto.addProduct(this.nameProduct,this.priceProduct,this.stockProduct)
+            client.sendMessage(message.from,resultado)
+           }
+        
+
+          }catch(error){
+            console.log(error)
+            client.sendMessage(message.from,'No se pudo agregar el producto')
+          }
+      
     })
     }
 
-    delete(){
-      const producto = new Producto();
-      client.on('message',message => {
-                  console.log(message.body)
-                  producto.deleteProduct(message.body).then(( rta)=>{
-                    client.sendMessage(message.from,rta);
-                  
-                   }).catch(function(err){
-                      console.log(err.message)
-                   }).finally(() => {
-                      return
-                  });
-                   })
 
-
+    delete() {
+        const producto = new Producto();
+        client.on('message', async message => {
+          try {
+            console.log(message.body);
+            const name = message.body.trim();
+            if (name == '1' ||name == '2' ||name == '3' ||name == '4' ) {
+              this.menuPrincipal()
+             } else {
+              const result = await producto.deleteProduct(name);
+              client.sendMessage(message.from, result);
+            }
+          } catch (error) {
+            console.error(error);
+            client.sendMessage(message.from, 'No se pudo eliminar el producto');
+          }
+        });
       }
-
-
-   
+      
 
 
    
