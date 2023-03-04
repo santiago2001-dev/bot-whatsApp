@@ -68,9 +68,9 @@ getAllProduct  () {
     });
   }
 
-  updateProduct(id, price, stock){
+  updateProduct(name, price, stock){
     return new Promise((resolve, reject) => {
-      const query = `update productos set  price = '${price}', stock = '${stock}' where id = '${id}'`;
+      const query = `update productos set  price = '${price}', stock = '${stock}' where name = '${name}'`;
       db.query(query, (error, results, fields) => {
         if(error){
           reject(error)

@@ -2,14 +2,7 @@ const {client} = require('../middelwares/conexion-wha');
 const Producto = require('./curd-producto')
 class Menu {
 
-    constructor(){
-        this.nameProduct
-        this.priceProduct
-        this.stockProduct
-        this.produ
-
-
-    }
+ 
       async opciones (){
 
 
@@ -88,16 +81,16 @@ class Menu {
 
       client.on('message',async message => {
       let array = message.body.split(",");
-        this.nameProduct = array[0];
-        this.priceProduct = array[1];
-        this.stockProduct = array[2];
+        let nameProduct = array[0];
+        let priceProduct = array[1];
+        let stockProduct = array[2];
 
         try{
            const product = message.body.trim();
            if (product == '1' ||product == '2' ||product == '3' ||product == '4' ) {
             this.menuPrincipal();
            }else{
-            let resultado = await producto.addProduct(this.nameProduct,this.priceProduct,this.stockProduct)
+            let resultado = await producto.addProduct(nameProduct,priceProduct,stockProduct)
             client.sendMessage(message.from,resultado)
            }
         
@@ -138,12 +131,16 @@ class Menu {
     update(){
       const producto = new Producto();
       client.on('message', async message => {
+        let array = message.body.split(",");
+        let nameProduct = array[0];
+        let priceProduct = array[1];
+        let stockProduct = array[2];
         const name = message.body.trim();
         try{
           if (name == '1' ||name == '2' ||name == '3' ||name == '4' ) {
             this.menuPrincipal()
           }else{
-            let resultado = await producto.updateProduct(this.nameProduct,this.priceProduct,this.stockProduct)
+            let resultado = await producto.updateProduct(nameProduct,priceProduct,stockProduct)
             client.sendMessage(message.from,resultado)
           }
         }catch(error){
