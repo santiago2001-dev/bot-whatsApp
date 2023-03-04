@@ -6,36 +6,7 @@ class producto{
         this.prod = ''
         this.resultado = ''
     }
-//  getAllProduct = ()=>{
-//     const query = 'select * from productos';
-//     db.query(query,(err,results,fields)=>{
-//         if(err){
-//          throw  err
-//         }else{
-        
-//              let products = []; // Objeto JSON que vamos a construir
 
-//             for (let i = 0; i < results.length; i++) {
-//               let product = {
-//                 id: results[i].id,
-//                 name: results[i].name,
-//                 price: results[i].price,
-//                 stock : results[i].stock
-//               };
-        
-//               products.push(product); 
-              
-//                this.prod = `nombre : ${products[0].name}\n precio : ${products[0].price}\n cantidad${products[0].stock}`
-//               return this.products
-//               //this.sendMessage(this.prod);
-            
-             
-             
-//             }
-        
-//         }
-//     })
-// }
 
 getAllProduct = () => {
     const query = 'select * from productos';
@@ -70,14 +41,33 @@ getAllProduct = () => {
   
 
 
-sendMessage(info){
-    client.on('message',message => {
-            console.log('hola',info)
-        client.sendMessage(message.from,info)
+  deleteProduct(name){
+    return new Promise((resolve, reject) => {
+      const query = `delete from productos where name = '${name}'`;
+      db.query(query, (err, results, fields) => {
+        if (err) {
+          reject(err);
+        } else {
+          let rta = 'prooducto elimnado de forma correcta'
+          resolve(rta);
+        }
+      });
+    });
+  }
 
-        });
-
-}
+  addProduct(name, price, stock){
+    return new Promise((resolve, reject) => {
+      const query = `insert into productos (name, price, stock) values ('${name}','${price}','${stock}')`;
+      db.query(query, (err, results, fields) => {
+        if (err) {
+          reject(err);
+        } else {
+          let rta = 'prooducto agregado de forma correcta'
+          resolve(rta);
+        }
+      });
+    });
+  }
 
 }
 module.exports = producto
