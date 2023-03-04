@@ -1,4 +1,3 @@
-const { Client } = require('whatsapp-web.js');
 const {client} = require('../middelwares/conexion-wha');
 const Producto = require('./curd-producto')
 class Menu {
@@ -29,13 +28,14 @@ class Menu {
                    }
                      if(message.body =='2'){
                       await  client.sendMessage(message.from,'porfavor ingresa el nombre , precio y cantidad del producto seperado por coma');
-                      this.crate()
+                      this.create()
                     
                      
 
                     }
                     if(message.body =='3'){
-
+                      await client.sendMessage(message.from ,'Ingresa el nombre del producto seperado por coma el precio y cantidad a actualizar')
+                      this.update()
                     }
                   if(message.body =='4'){
                     await client.sendMessage(message.from,'porfavor ingresa el nombre del producto a eliminar')
@@ -63,8 +63,27 @@ class Menu {
 
            
            
-
-      crate(){
+      getall(){
+        const producto = new Producto();
+        client.on('message', async message => {
+          try {
+            console.log(message.body);
+            const name = message.body.trim();
+            if (name == '1' ||name == '2' ||name == '3' ||name == '4' ) {
+              this.menuPrincipal()
+             } else {
+              const result = await producto.getAllProduct();
+              client.sendMessage(message.from, result);
+            }
+          } catch (error) {
+            console.error(error);
+            client.sendMessage(message.from, 'No se pudo obtener los productos');
+          } finally{
+            return
+          }
+        })
+      }
+      create(){
       const producto = new Producto();
 
       client.on('message',async message => {
@@ -86,6 +105,8 @@ class Menu {
           }catch(error){
             console.log(error)
             client.sendMessage(message.from,'No se pudo agregar el producto')
+          }finally{
+            return
           }
       
     })
@@ -107,12 +128,32 @@ class Menu {
           } catch (error) {
             console.error(error);
             client.sendMessage(message.from, 'No se pudo eliminar el producto');
+          } finally{
+            return
           }
-        });
+        })
       }
       
 
-
+    update(){
+      const producto = new Producto();
+      client.on('message', async message => {
+        const name = message.body.trim();
+        try{
+          if (name == '1' ||name == '2' ||name == '3' ||name == '4' ) {
+            this.menuPrincipal()
+          }else{
+            let resultado = await producto.updateProduct(this.nameProduct,this.priceProduct,this.stockProduct)
+            client.sendMessage(message.from,resultado)
+          }
+        }catch(error){
+            console.log(error)
+            client.sendMessage(message.from,'No se pudo actualizar el producto')
+        }finally{
+          return
+        }
+      })
+    }
    
 }
 

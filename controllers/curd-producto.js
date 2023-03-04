@@ -1,5 +1,4 @@
 const db = require('../db/config');
-const {client} = require('../middelwares/conexion-wha');
 
 class producto{
     constructor(){
@@ -11,9 +10,9 @@ class producto{
 getAllProduct  () {
     const query = 'select * from productos';
     return new Promise((resolve, reject) => {
-      db.query(query, (err, results, fields) => {
-        if (err) {
-          reject(err);
+      db.query(query, (error, results, fields) => {
+        if (error) {
+          reject(error);
         } else {
           let products = [];
           for (let i = 0; i < results.length; i++) {
@@ -44,12 +43,12 @@ getAllProduct  () {
   deleteProduct(name){
     return new Promise((resolve, reject) => {
       const query = `delete from productos where name = '${name}'`;
-      db.query(query, (err, results, fields) => {
-        if (err) {
-          reject(err);
+      db.query(query, (error, results, fields) => {
+        if (error) {
+          reject(error);
         } else {
           let rta = 'producto elimnado de forma correcta'
-          resolve(rta);
+          resolve(rta)  ;
         }
       });
     });
@@ -58,15 +57,29 @@ getAllProduct  () {
   addProduct(name, price, stock){
     return new Promise((resolve, reject) => {
       const query = `insert into productos (name, price, stock) values ('${name}','${price}','${stock}')`;
-      db.query(query, (err, results, fields) => {
-        if (err) {
-          reject(err);
+      db.query(query, (error, results, fields) => {
+        if (error) {
+          reject(error);
         } else {
           let rta = 'producto agregado de forma correcta'
           resolve(rta);
         }
       });
     });
+  }
+
+  updateProduct(id, price, stock){
+    return new Promise((resolve, reject) => {
+      const query = `update productos set  price = '${price}', stock = '${stock}' where id = '${id}'`;
+      db.query(query, (error, results, fields) => {
+        if(error){
+          reject(error)
+        }else{
+          let rta = 'producto actualizado de forma correcta'
+          resolve(rta)
+        }
+      })
+    })
   }
 
 }
