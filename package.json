@@ -4,7 +4,9 @@
   "description": "mediante una api se crea  bot que lee mensajes en whatssap y hace operaciones de crud en una db",
   "main": "inde.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon inde.js"
+
   },
   "author": "santiago morales",
   "license": "ISC",
@@ -14,6 +16,9 @@
     "express": "^4.18.2",
     "mysql": "^2.18.1",
     "qrcode-terminal": "^0.12.0",
-    "whatsapp-web.js": "^1.19.4"
+    "whatsapp-web.js": "^1.23.1-alpha.6"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
   }
 }

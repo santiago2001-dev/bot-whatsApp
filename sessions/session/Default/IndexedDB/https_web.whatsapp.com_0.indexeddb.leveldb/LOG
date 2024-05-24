@@ -1,0 +1,13 @@
+2024/05/17-09:28:00.009 4414 Reusing MANIFEST D:\santiago\Documents\pryectos nodejs\bot-whatssapp\sessions\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2024/05/17-09:28:00.010 4414 Recovering log #158
+2024/05/17-09:28:00.046 4414 Reusing old log D:\santiago\Documents\pryectos nodejs\bot-whatssapp\sessions\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000158.log 
+2024/05/17-09:33:12.391 209c Level-0 table #166: started
+2024/05/17-09:33:12.666 209c Level-0 table #166: 1155440 bytes OK
+2024/05/17-09:33:12.711 209c Delete type=0 #158
+2024/05/17-09:33:17.138 209c Compacting 1@1 + 5@2 files
+2024/05/17-09:33:17.664 209c Generated table #167@1: 64638 keys, 2409491 bytes
+2024/05/17-09:33:17.992 209c Generated table #168@1: 14658 keys, 2163782 bytes
+2024/05/17-09:33:18.442 209c Generated table #169@1: 26342 keys, 2200927 bytes
+2024/05/17-09:33:18.835 209c Generated table #170@1: 47446 keys, 988236 bytes
+2024/05/17-09:33:18.835 209c Compacted 1@1 + 5@2 files => 7762436 bytes
+2024/05/17-09:33:18.893 209c compacted to: files[ 0 0 4 0 0 0 0 ]
