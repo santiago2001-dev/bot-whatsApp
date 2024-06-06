@@ -1,3 +1,8 @@
-2024/05/17-09:27:55.830 58b8 Reusing MANIFEST D:\santiago\Documents\pryectos nodejs\bot-whatssapp\sessions\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2024/05/17-09:27:55.831 58b8 Recovering log #158
-2024/05/17-09:27:55.872 58b8 Reusing old log D:\santiago\Documents\pryectos nodejs\bot-whatssapp\sessions\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000158.log 
+2024/06/05-23:28:41.510 51e8 Reusing MANIFEST D:\santiago\Documents\pryectos nodejs\bot-whatssapp\sessions\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2024/06/05-23:28:41.512 51e8 Recovering log #3999
+2024/06/05-23:28:41.544 51e8 Reusing old log D:\santiago\Documents\pryectos nodejs\bot-whatssapp\sessions\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/003999.log 
+2024/06/05-23:28:41.544 51e8 Delete type=2 #3988
+2024/06/05-23:28:41.544 51e8 Delete type=2 #4000
+2024/06/05-23:28:42.693 38e8 Compacting 1@1 + 6@2 files
+2024/06/05-23:28:43.099 38e8 Generated table #4005@1: 86605 keys, 2236299 bytes
+2024/06/05-23:28:43.650 38e8 Generated table #4006@1: 95429 keys, 2247725 bytes

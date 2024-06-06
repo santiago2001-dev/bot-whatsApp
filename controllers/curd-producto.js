@@ -7,7 +7,7 @@ class producto{
     }
 
 
-getAllProduct  () {
+wwwgetAllProduct  () {
     const query = 'select * from productos';
     return new Promise((resolve, reject) => {
       db.query(query, (error, results, fields) => {
