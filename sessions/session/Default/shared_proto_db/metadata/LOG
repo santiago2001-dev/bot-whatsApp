@@ -1,2 +1,3 @@
-2024/06/05-21:00:05.775 984 Creating DB D:\santiago\Documents\pryectos nodejs\bot-whatssapp\sessions\session\Default\shared_proto_db\metadata since it was missing.
-2024/06/05-21:00:05.867 984 Reusing MANIFEST D:\santiago\Documents\pryectos nodejs\bot-whatssapp\sessions\session\Default\shared_proto_db\metadata/MANIFEST-000001
+2024/06/11-18:42:42.532 3338 Reusing MANIFEST D:\santiago\Documents\pryectos nodejs\bot-whatssapp\sessions\session\Default\shared_proto_db\metadata/MANIFEST-000001
+2024/06/11-18:42:42.538 3338 Recovering log #3
+2024/06/11-18:42:42.539 3338 Reusing old log D:\santiago\Documents\pryectos nodejs\bot-whatssapp\sessions\session\Default\shared_proto_db\metadata/000003.log 

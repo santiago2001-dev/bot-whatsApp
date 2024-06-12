@@ -9,6 +9,7 @@ class Server {
     this.port = process.env.PORT || 3000;
     this.autenticationRoute = "/api/login";
     this.whaRoute = "/api/whatssApp";
+    this.ubicacionPath =  "/api/ubicacion"
 
     this.middelwares();
     //this.controller();
@@ -22,10 +23,10 @@ class Server {
     this.app.use(express.urlencoded({ limit: "50mb" }));
   }
 
-  controller() {
-    const menu = new Menu();
-    menu.opciones();
-  }
+  // controller() {
+  //   const menu = new Menu();
+  //   menu.opciones();
+  // }
 
   conexion() {
     sequelize.authenticate()
@@ -40,7 +41,10 @@ class Server {
 
   routes() {
     this.app.use(this.autenticationRoute, require("../routes/loginRoutes"));
+    this.app.use(this.ubicacionPath, require("../routes/ubicacionRoutes"));
+
     this.app.use(this.whaRoute, require("../routes/botRoutes"));
+    
 
   }
 
