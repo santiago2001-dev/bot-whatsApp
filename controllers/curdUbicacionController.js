@@ -2,6 +2,7 @@ const Ubicacion = require("../models/ubicacion");
 
 const insertUbicacionClient = async (ubicacion) => {
   try {
+    console.log(ubicacion)
     let { longitud, latitud, conductor, tipo, id_empresa } = ubicacion;
     await Ubicacion.create({
       longitud: longitud,
@@ -12,8 +13,8 @@ const insertUbicacionClient = async (ubicacion) => {
     });
     return true;
   } catch (error) {
-    return false;
-  }
+    console.log(error.message)
+}
 };
 
 const getUbicById = async (req, res) => {

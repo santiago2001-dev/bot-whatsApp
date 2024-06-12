@@ -21,6 +21,11 @@ const Ubicacion = sequelize.define(
         allowNull: true
 
       },
+      fecha :{
+        type: DataTypes.DATE,
+        defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+        allowNull: false
+      },
 
       tipo: {
         type: DataTypes.INTEGER,
