@@ -1,6 +1,6 @@
 const cors = require("cors");
 const express = require("express");
-const Menu = require("../controllers/bot-wha");
+//const Menu = require("../controllers/bot-wha");
 const sequelize = require("../db/conexion-squalize");
 
 class Server {
@@ -9,7 +9,7 @@ class Server {
     this.port = process.env.PORT || 3000;
     this.autenticationRoute = "/api/login";
     this.whaRoute = "/api/whatssApp";
-    this.ubicacionPath =  "/api/ubicacion"
+    this.ubicacionPath = "/api/ubicacion";
 
     this.middelwares();
     //this.controller();
@@ -23,16 +23,16 @@ class Server {
     this.app.use(express.urlencoded({ limit: "50mb" }));
   }
 
-  // controller() {
-  //   const menu = new Menu();
-  //   menu.opciones();
+  //controller() {
+  //   const menu = startMenu();
+  // menu.start();
   // }
 
   conexion() {
-    sequelize.authenticate()
+    sequelize
+      .authenticate()
       .then(() => {
         console.log("Conexión establecida con éxito.");
-        
       })
       .catch((err) => {
         console.error("Error al conectar con la base de datos:", err);
@@ -44,8 +44,6 @@ class Server {
     this.app.use(this.ubicacionPath, require("../routes/ubicacionRoutes"));
 
     this.app.use(this.whaRoute, require("../routes/botRoutes"));
-    
-
   }
 
   listen() {

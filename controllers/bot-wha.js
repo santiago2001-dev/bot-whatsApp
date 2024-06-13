@@ -1,187 +1,178 @@
-// const { client } = require("../middelwares/conexion-wha");
-// const Producto = require("./curd-producto");
+const { client } = require("../middelwares/conexion-wha");
+const { insertUbicacionClient } = require("./curdUbicacionController");
 
-// class Menu {
-//   async opciones() {
-//     this.menuPrincipal();
+class Menu {
+  constructor(numeroConductor, id_cedula, id_empresa) {
+    this.numeroConductor = numeroConductor;
+    this.messageListener = null;
+    this.keywordListener = null;
+    this.id_cedula = id_cedula;
+    this.id_empresa = id_empresa;
+  }
 
-//     client.on("message", async (message) => {
-//       switch (message.body) {
-//         case "1":
-//           const producto = new Producto();
-//           let result = await producto.getAllProduct();
-//           await client.sendMessage(message.from, result);
-//           this.menuPrincipal();
-//           break;
+  async start() {
+    this.listenForKeyword();
+  }
 
-//         case "2":
-//           await client.sendMessage(
-//             message.from,
-//             "Por favor ingresa el nombre, precio y cantidad del producto separado por coma"
-//           );
-//           this.create();
-//           break;
+  listenForKeyword() {
+    console.log("menu activado");
+    this.removeListeners();
+    this.keywordListener = async (message) => {
+      if (
+        message.body.toLowerCase() === "hola" &&
+        message.from === `57${this.numeroConductor}@c.us`
+      ) {
+        await client.sendMessage(
+          message.from,
+          "De vuelta en el menú principal\n" +
+            "Hola soy botRastreo, ¿en qué te puedo colaborar? 😀👋\n Estas son las opciones:\n" +
+            "1.🚚 Notifica llegada de cargue\n" +
+            "2. ➕ Notifica llegada de descargue\n" +
+            "3.🔚 Notifica llegada a destino\n" +
+            "4.🔁 volver a el menu\n"
+        );
+        this.listenForOptions(message.from);
+      }
+    };
+    client.on("message", this.keywordListener);
+  }
 
-//         case "3":
-//           await client.sendMessage(
-//             message.from,
-//             "Ingresa el nombre del producto, el precio y la cantidad a actualizar, separados por coma"
-//           );
-//           this.update();
-//           break;
+  listenForOptions(from) {
+    this.removeListeners();
+    this.messageListener = async (message) => {
+      if (message.from === from) {
+        switch (message.body) {
+          case "1":
+            const message = {
+              number: this.numeroConductor,
+              mensaje: "Envíe la ubicación actual por favor.",
+            };
+            this.enviarMensajeConductor(message);
 
-//         case "4":
-//           await client.sendMessage(
-//             message.from,
-//             "Ingresa el nombre del producto para eliminar"
-//           );
-//           this.delete();
-//           break;
+            let dataUbi = {
+              number: this.numeroConductor,
+              conductor: this.id_cedula,
+              id_empresa: this.id_empresa,
+              tipo: 2,
+            };
 
-//         default:
-//           await client.sendMessage(
-//             message.from,
-//             "de vuelta en el menu principal"
-//           );
-//           this.menuPrincipal();
-//           break;
-//       }
-//     });
-//   }
+            this.listenForLocation(from, dataUbi);
 
-//   menuPrincipal() {
-//     client.on("message", (message) => {
-//       if (
-//         message.body.toLowerCase === "hola" &&
-//         !message.body.includes("1") &&
-//         !message.body.includes("2") &&
-//         !message.body.includes("3") &&
-//         !message.body.includes("4")
-//       ) {
-//         client.sendMessage(
-//           message.from,
-//           "Hola soy bootStore Poli , ¿en que te puedo colaborar? 😀👋\n Estas son las opciones \n" +
-//             "1.🔍 Ver lista de productos \n" +
-//             "2. ➕ Agregar Productos \n" +
-//             "3.🔁 Actualizar Producto \n" +
-//             "4.✖ Borrar Producto \n"
-//         );
-//       }
-//     });
-//   }
+            break;
 
-//   getAll() {
-//     const producto = new Producto();
-//     client.on("message", async (message) => {
-//       try {
-//         console.log(message.body);
-//         const name = message.body.trim();
-//         if (name == "1" || name == "2" || name == "3" || name == "4") {
-//           this.menuPrincipal();
-//         } else {
-//           const result = await producto.getAllProduct();
-//           client.sendMessage(message.from, result);
-//         }
-//       } catch (error) {
-//         console.error(error);
-//         client.sendMessage(message.from, "No se pudo obtener los productos");
-//       } finally {
-//         client.removeAllListeners("message"); // Termina el ciclo del mensaje
-//         this.menuPrincipal();
-//       }
-//     });
-//   }
+          case "2":
+            const messageDes = {
+              number: this.numeroConductor,
+              mensaje: "Envíe la ubicación actual por favor.",
+            };
+            this.enviarMensajeConductor(messageDes);
 
-//   create() {
-//     const producto = new Producto();
+            let dataUbiDes = {
+              number: this.numeroConductor,
+              conductor: this.id_cedula,
+              id_empresa: this.id_empresa,
+              tipo: 3,
+            };
 
-//     client.on("message", async (message) => {
-//       let array = message.body.split(",");
-//       let nameProduct = array[0];
-//       let priceProduct = array[1];
-//       let stockProduct = array[2];
+            this.listenForLocation(from, dataUbiDes);
 
-//       try {
-//         const product = message.body.trim();
-//         if (
-//           product == "1" ||
-//           product == "2" ||
-//           product == "3" ||
-//           product == "4"
-//         ) {
-//           this.menuPrincipal();
-//         } else {
-//           let resultado = await producto.addProduct(
-//             nameProduct,
-//             priceProduct,
-//             stockProduct
-//           );
-//           client.sendMessage(message.from, resultado);
-//         }
-//       } catch (error) {
-//         console.log(error);
-//         client.sendMessage(message.from, "No se pudo agregar el producto");
-//       } finally {
-//         client.removeAllListeners("message"); // Termina el ciclo del mensaje
-//         this.menuPrincipal();
-//       }
-//     });
-//   }
+            break;
+          case "3":
+            const messageFin = {
+              number: this.numeroConductor,
+              mensaje: "Envíe la ubicación actual por favor.",
+            };
+            this.enviarMensajeConductor(messageFin);
 
-//   delete() {
-//     const producto = new Producto();
-//     client.on("message", async (message) => {
-//       try {
-//         console.log(message.body);
-//         const name = message.body.trim();
-//         if (name == "1" || name == "2" || name == "3" || name == "4") {
-//           this.menuPrincipal();
-//         } else {
-//           const result = await producto.deleteProduct(name);
-//           client.sendMessage(message.from, result);
-//         }
-//       } catch (error) {
-//         console.error(error);
-//         client.sendMessage(message.from, "No se pudo eliminar el producto");
-//       } finally {
-//         client.removeAllListeners("message"); // Termina el ciclo del mensaje
-//         this.menuPrincipal();
-//       }
-//     });
-//   }
+            let dataUbiFin = {
+              number: this.numeroConductor,
+              conductor: this.id_cedula,
+              id_empresa: this.id_empresa,
+              tipo: 4,
+            };
 
-//   update() {
-//     const producto = new Producto();
-//     client.on("message", async (message) => {
-//       let array = message.body.split(",");
-//       let nameProduct = array[0];
-//       let priceProduct = array[1];
-//       let stockProduct = array[2];
-//       const name = message.body.trim();
-//       try {
-//         if (name == "1" || name == "2" || name == "3" || name == "4") {
-//           this.menuPrincipal();
-//         } else {
-//           let resultado = await producto.updateProduct(
-//             nameProduct,
-//             priceProduct,
-//             stockProduct
-//           );
-//           client.sendMessage(message.from, resultado);
-//         }
-//       } catch (error) {
-//         console.log(error);
-//         client.sendMessage(message.from, "No se pudo actualizar el producto");
-//       } finally {
-//         client.removeAllListeners("message"); // Termina el ciclo del mensaje
-//         this.menuPrincipal();
-//       }
-//     });
-//   }
+            this.listenForLocation(from, dataUbiFin);
 
+            break;
 
-  
-// }
+          default:
+            let infoMessage = {
+              number: this.numeroConductor,
+              mensaje:
+                "De vuelta en el menú principal\n" +
+                "Hola soy botRastreo, ¿en qué te puedo colaborar? 😀👋\n Estas son las opciones:\n" +
+                "1.🚚 Notifica llegada de cargue\n" +
+                "2. ➕ Notifica llegada de descargue\n" +
+                "3.🔚 Notifica llegada a destino\n" +
+                "4.🔁 volver a el menu\n",
+            };
+            this.enviarMensajeConductor(infoMessage);
+            break;
+        }
+      }
+    };
+    client.on("message", this.messageListener);
+  }
 
-// module.exports = Menu;
+  removeListeners() {
+    if (this.keywordListener) {
+      client.off("message", this.keywordListener);
+      this.keywordListener = null;
+    }
+    if (this.messageListener) {
+      client.off("message", this.messageListener);
+      this.messageListener = null;
+    }
+  }
 
+  listenForLocation(from, dataUbi) {
+    const locationListener = async (message) => {
+      if (message.from === from && message.type === "location") {
+        const location = message.location;
+        dataUbi.longitud = location.longitude;
+        dataUbi.latitud = location.latitude;
+        const insertUbi = await insertUbicacionClient(dataUbi);
+        if (insertUbi) {
+          const response = {
+            number: dataUbi.number,
+            mensaje: "ubicacion capturada de forma correcta",
+          };
+          this.enviarMensajeConductor(response);
+        } else {
+          const response = {
+            number: dataUbi.number,
+            mensaje: "no se pudo capturar la ubicacion intente de nuevo ",
+          };
+          this.enviarMensajeConductor(response);
+        }
+
+        client.off("message", locationListener);
+      } else {
+        const response = {
+          number: dataUbi.number,
+          mensaje: "envie su ubicacion.  ",
+        };
+        this.enviarMensajeConductor(response);
+      }
+    };
+    client.on("message", locationListener);
+  }
+
+ 
+  enviarMensajeConductor = async (infoMessage) => {
+    try {
+      const { number, mensaje } = infoMessage;
+      const chatId = `57${number}@c.us`;
+
+      const response = await client.sendMessage(chatId, mensaje);
+      if (response.id.fromMe) {
+        return "Mensaje enviado con éxito";
+      }
+    } catch (error) {
+      console.error("Error al enviar el mensaje al conductor:", error);
+      throw error;
+    }
+  };
+}
+
+module.exports = Menu;

@@ -17,12 +17,13 @@
     "express": "^4.18.2",
     "express-validator": "^7.1.0",
     "jsonwebtoken": "^9.0.2",
+    "local-storage": "^2.0.0",
     "mysql": "^2.18.1",
     "mysql2": "^3.10.0",
     "nodemailer": "^6.9.13",
     "qrcode-terminal": "^0.12.0",
     "sequelize": "^6.37.3",
-    "whatsapp-web.js": "^1.23.1-alpha.6"
+    "whatsapp-web.js": "^1.24.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.0"
