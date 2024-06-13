@@ -1,3 +1,31 @@
-2024/06/12-18:25:35.952 89a4 Reusing MANIFEST D:\santiago\Documents\pryectos nodejs\bot-whatssapp\sessions\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2024/06/12-18:25:35.954 89a4 Recovering log #167
-2024/06/12-18:25:36.750 89a4 Reusing old log D:\santiago\Documents\pryectos nodejs\bot-whatssapp\sessions\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000167.log 
+2024/06/12-20:34:23.237 4ea4 Reusing MANIFEST D:\santiago\Documents\pryectos nodejs\bot-whatssapp\sessions\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2024/06/12-20:34:23.238 4ea4 Recovering log #4553
+2024/06/12-20:34:23.564 4ea4 Reusing old log D:\santiago\Documents\pryectos nodejs\bot-whatssapp\sessions\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/004553.log 
+2024/06/12-20:34:31.703 4ec8 Level-0 table #4601: started
+2024/06/12-20:34:31.930 4ec8 Level-0 table #4601: 1071089 bytes OK
+2024/06/12-20:34:31.994 4ec8 Delete type=0 #4553
+2024/06/12-20:34:37.393 4ec8 Compacting 1@0 + 0@1 files
+2024/06/12-20:34:38.137 4ec8 Generated table #4602@0: 21870 keys, 226087 bytes
+2024/06/12-20:34:38.559 4ec8 Generated table #4603@0: 32 keys, 3619 bytes
+2024/06/12-20:34:39.107 4ec8 Generated table #4604@0: 5690 keys, 174828 bytes
+2024/06/12-20:34:39.447 4ec8 Generated table #4605@0: 6260 keys, 134108 bytes
+2024/06/12-20:34:39.583 4ec8 Generated table #4606@0: 2795 keys, 60452 bytes
+2024/06/12-20:34:39.583 4ec8 Compacted 1@0 + 0@1 files => 599094 bytes
+2024/06/12-20:34:39.666 4ec8 compacted to: files[ 0 5 48 5 0 0 0 ]
+2024/06/12-20:34:40.299 4ec8 Moved #4602 to level-2 226087 bytes OK: files[ 0 4 49 5 0 0 0 ]
+2024/06/12-20:34:40.333 4ec8 Compacting 1@1 + 9@2 files
+2024/06/12-20:34:41.443 4ec8 Generated table #4607@1: 3404 keys, 2150095 bytes
+2024/06/12-20:34:42.228 4ec8 Generated table #4608@1: 3940 keys, 2146738 bytes
+2024/06/12-20:34:42.850 4ec8 Generated table #4609@1: 3765 keys, 2147259 bytes
+2024/06/12-20:34:43.731 4ec8 Generated table #4610@1: 3574 keys, 2147299 bytes
+2024/06/12-20:34:44.434 4ec8 Generated table #4611@1: 12630 keys, 2164481 bytes
+2024/06/12-20:34:45.228 4ec8 Generated table #4612@1: 44391 keys, 2234443 bytes
+2024/06/12-20:34:45.941 4ec8 Generated table #4613@1: 30264 keys, 2263878 bytes
+2024/06/12-20:34:46.678 4ec8 Generated table #4614@1: 28405 keys, 2268880 bytes
+2024/06/12-20:34:47.304 4ec8 Generated table #4615@1: 33093 keys, 2255498 bytes
+2024/06/12-20:34:47.416 4ec8 Generated table #4616@1: 30 keys, 3070 bytes
+2024/06/12-20:34:47.416 4ec8 Compacted 1@1 + 9@2 files => 19781641 bytes
+2024/06/12-20:34:47.469 4ec8 compacted to: files[ 0 3 50 5 0 0 0 ]
+2024/06/12-20:34:47.470 4ec8 Delete type=2 #4601
+2024/06/12-20:34:49.508 8c6c Compacting 1@2 + 3@3 files
+2024/06/12-20:34:50.712 8c6c Generated table #4617@2: 89110 keys, 2239079 bytes

@@ -2,7 +2,6 @@ const cors = require("cors");
 const express = require("express");
 //const Menu = require("../controllers/bot-wha");
 const sequelize = require("../db/conexion-squalize");
-const { startMenu } = require("../controllers/bot-wha");
 
 class Server {
   constructor() {
